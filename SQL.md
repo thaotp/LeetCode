@@ -1,10 +1,12 @@
 # Problems
-[182. Duplicate Emails](https://leetcode.com/problems/duplicate-emails/description/)
+[182. Duplicate Emails](#182.-Duplicate-Emails)
 
-[196. Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails/description/)
+[196. Delete Duplicate Emails](#196.-Delete-Duplicate-Emails)
 # Contents
 ## 182. Duplicate Emails
 ### Description
+https://leetcode.com/problems/duplicate-emails/description/
+
 Write a SQL query to find all duplicate emails in a table named Person.
 ```
 +----+---------+
@@ -37,6 +39,7 @@ HAVING
 ```
 ## 196. Delete Duplicate Emails
 ### Description
+https://leetcode.com/problems/delete-duplicate-emails/description/
 
 Write a SQL query to delete all duplicate email entries in a table named Person, keeping only unique emails based on its smallest Id.
 ```
