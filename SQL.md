@@ -15,9 +15,13 @@
 
 [196. Delete Duplicate Emails](#196.-Delete-Duplicate-Emails)
 
+[197. Rising Temperature](#197.-Rising-Temperature)
+
 [262. Trips and Users](#262.-Trips-and-Users)
 
 [595. Big Countries](#595.-Big-Countries)
+
+[596. Classes More Than 5 Students](#596.-Classes-More-Than-5-Students)
 
 [626. Exchange Seats](#626.-Exchange-Seats)
 
@@ -378,6 +382,40 @@ WHERE description != "boring"
 AND id % 2 != 0
 ORDER BY rating DESC;
 ```
+## 197. Rising Temperature
+### Description
+https://leetcode.com/problems/rising-temperature/description/
+Given a Weather table, write a SQL query to find all dates' Ids with higher temperature compared to its previous (yesterday's) dates.
+
+```
++---------+------------------+------------------+
+| Id(INT) | RecordDate(DATE) | Temperature(INT) |
++---------+------------------+------------------+
+|       1 |       2015-01-01 |               10 |
+|       2 |       2015-01-02 |               25 |
+|       3 |       2015-01-03 |               20 |
+|       4 |       2015-01-04 |               30 |
++---------+------------------+------------------+
+```
+For example, return the following Ids for the above Weather table:
+
+```
++----+
+| Id |
++----+
+|  2 |
+|  4 |
++----+
+```
+
+### Solution
+
+```SQL
+SELECT weather.id AS 'Id'
+FROM weather
+JOIN weather w ON weather.RecordDate = w.RecordDate + INTERVAL 1 DAY
+AND weather.Temperature > w.Temperature ;
+```
 
 ## 262. Trips and Users
 ### Description
@@ -483,6 +521,44 @@ FROM world
 WHERE area > 3000000
   OR population > 25000000 ;
 
+```
+## 596. Classes More Than 5 Students
+### Description
+There is a table courses with columns: student and class
+
+Please list out all classes which have more than or equal to 5 students.
+
+For example, the table:
+```
++---------+------------+
+| student | class      |
++---------+------------+
+| A       | Math       |
+| B       | English    |
+| C       | Math       |
+| D       | Biology    |
+| E       | Math       |
+| F       | Computer   |
+| G       | Math       |
+| H       | Math       |
+| I       | Math       |
++---------+------------+
+```
+Should output:
+```
++---------+
+| class   |
++---------+
+| Math    |
++---------+
+```
+### Solution
+
+```SQL
+SELECT CLASS
+FROM courses
+GROUP BY CLASS
+HAVING count(distinct(student))>=5
 ```
 
 ## 626. Exchange Seats
