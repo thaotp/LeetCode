@@ -1,5 +1,7 @@
 # Problems
-[175. Combine Two Tables](175.-Combine-Two-Tables)
+[175. Combine Two Tables](#175.-Combine-Two-Tables)
+
+[177. Nth Highest Salary](#177.-Nth-Highest-Salary)
 
 [182. Duplicate Emails](#182.-Duplicate-Emails)
 
@@ -32,7 +34,7 @@ Table: Address
 +-------------+---------+
 ```
 AddressId is the primary key column for this table.
- 
+
 
 Write a SQL query for a report that provides the following information for each person in the Person table, regardless if there is an address for each of those people:
 ```
@@ -47,6 +49,45 @@ SELECT FirstName,
        State
 FROM Person
 LEFT JOIN Address ON Person.PersonId = Address.PersonId ;
+```
+
+
+## 177. Nth Highest Salary
+### Description
+https://leetcode.com/problems/nth-highest-salary/description/
+
+Write a SQL query to get the nth highest salary from the Employee table.
+```
++----+--------+
+| Id | Salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+```
+For example, given the above Employee table, the nth highest salary where n = 2 is 200. If there is no nth highest salary, then the query should return null.
+
+```
++------------------------+
+| getNthHighestSalary(2) |
++------------------------+
+| 200                    |
++------------------------+
+```
+
+### Solution
+
+```SQL
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+DECLARE M INT;
+SET M=N-1;
+  RETURN (
+      # Write your MySQL query statement below.
+      SELECT IFNULL( (SELECT DISTINCT Salary FROM Employee ORDER BY Salary DESC LIMIT M, 1), NULL )
+  );
+END
 ```
 
 ## 182. Duplicate Emails
