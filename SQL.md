@@ -17,7 +17,9 @@
 
 [262. Trips and Users](#262.-Trips-and-Users)
 
-[595. Big Countries](595.-Big-Countries)
+[595. Big Countries](#595.-Big-Countries)
+
+[626. Exchange Seats](#626.-Exchange-Seats)
 
 [627. Swap Salary](#627.-Swap-Salary)
 
@@ -481,6 +483,54 @@ FROM world
 WHERE area > 3000000
   OR population > 25000000 ;
 
+```
+
+## 626. Exchange Seats
+### Description
+Mary is a teacher in a middle school and she has a table seat storing students' names and their corresponding seat ids.
+
+The column id is continuous increment.
+Mary wants to change seats for the adjacent students.
+Can you write a SQL query to output the result for Mary?
+```
++---------+---------+
+|    id   | student |
++---------+---------+
+|    1    | Abbot   |
+|    2    | Doris   |
+|    3    | Emerson |
+|    4    | Green   |
+|    5    | Jeames  |
++---------+---------+
+```
+For the sample input, the output is:
+```
++---------+---------+
+|    id   | student |
++---------+---------+
+|    1    | Doris   |
+|    2    | Abbot   |
+|    3    | Green   |
+|    4    | Emerson |
+|    5    | Jeames  |
++---------+---------+
+```
+
+### Solution
+```SQL
+SELECT (CASE
+            WHEN mod(id, 2) != 0
+                 AND records != id THEN id + 1
+            WHEN mod(id, 2) != 0
+                 AND records = id THEN id
+            ELSE id - 1
+        END) AS id,
+       student
+FROM seat,
+
+  (SELECT count(*) AS records
+   FROM seat) AS seat_records
+ORDER BY id ASC;
 ```
 ## 627. Swap Salary
 ### Description
