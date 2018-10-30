@@ -1,4 +1,5 @@
 # https://leetcode.com/problems/best-time-to-buy-and-sell-stock
+# Key: Tìm khác số hiệu lớn nhất giữa 2 phần tử trong mảng theo thứ tự tăng dần.
 func maxProfit(prices []int) int {
     if prices == nil {
         return 0
